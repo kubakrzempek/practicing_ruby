@@ -25,9 +25,9 @@ module TetrisPrototype
       end.join("\n")
     end
 
-    def paint_shape(shape,position)
+    def paint_shape(shape,position=[5,5], symbol = '#')
       shape.translated_points(position).each do |point|
-        paint(point,Piece::SYMBOL)
+        paint(point,symbol)
       end
     end
   end
@@ -63,6 +63,28 @@ module TetrisPrototype
       points.map {|x,y| [x+dx, y+dy] }
     end
   end
+
+  class Game
+    def initialize
+      @junk = []
+      @piece = nil
+      @piece_position = []
+    end
+
+    attr_accessor :piece, :piece_position, :junk
+
+    def to_s
+      canvas = Canvas.new
+
+      junk.each do |pos|
+        canvas.paint(pos, "|")
+      end
+
+      canvas.paint_shape(piece, piece_position, '#')
+
+      canvas.to_s
+    end
+  end
 end
 
 #example 1 - working canvas
@@ -92,16 +114,16 @@ canvas.paint([9,2], "|")
 
 puts canvas
 
-#example2 - working painting pieces
+#example2 - painting pieces
 
 canvas = TetrisPrototype::Canvas.new
 
 bent_shape = TetrisPrototype::Piece.new([[0,1],[0,2],[1,0],[1,1]])
-bent_shape.paint(canvas)
+canvas.paint_shape(bent_shape)
 
 puts canvas
 
-#example3 - working painting pieces at specified points
+#example3 - painting pieces at specified points
 
 canvas = TetrisPrototype::Canvas.new
 bent_shape = TetrisPrototype::Piece.new([[0,1],[0,2],[1,0],[1,1]])
@@ -109,3 +131,16 @@ bent_shape = TetrisPrototype::Piece.new([[0,1],[0,2],[1,0],[1,1]])
 canvas.paint_shape(bent_shape, [2,3])
 
 puts canvas
+
+#example4
+
+game = TetrisPrototype::Game.new
+bent_shape = TetrisPrototype::Piece.new([[0,1],[0,2],[1,0],[1,1]])
+game.piece = bent_shape
+game.piece_position = [2,3]
+game.junk += [[0,0], [1,0], [2,0], [2,1], [4,0],
+              [4,1], [4,2], [5,0], [5,1], [6,0],
+              [7,0], [8,0], [8,1], [9,0], [9,1],
+              [9,2]]
+
+puts game
