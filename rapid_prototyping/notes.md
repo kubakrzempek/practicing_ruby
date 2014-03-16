@@ -20,7 +20,7 @@ My plan: develop it to playable game in terminal.
 
 ## The Requirements Phase
 
-1. ####>A good prototype does not come from a top-down or bottom-up design, but instead comes from starting in the middle and building outwards
+1. ####A good prototype does not come from a top-down or bottom-up design, but instead comes from starting in the middle and building outwards
 
     * small vertical slice of the problem force you to think about many aspects, but not in a way 'whole problem at once'
     * this allows gathered knowledge - and probably - a good chunk of code to be reused
@@ -37,4 +37,4 @@ My plan: develop it to playable game in terminal.
 
 1. ####Relax your standard on testing and writing clean code - these get in the way until you grasp basic understanding
 
-From now on the comments on code are within commits' messages.
+2. ####From now on the comments on code are within commits' messages.
